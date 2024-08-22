@@ -42,6 +42,24 @@ export function usarBD() {
         }
     }
 
-    return { create, read, remove }
+    async function update(dados) {
+        const regras = await bd.prepareAsync(
+            "UPDATE produtos SET nome = $nome, quantidade = $quantidade WHERE id = $id"
+        );
+
+        try {
+            await regras.executeAsync({
+                $id: dados.id,
+                $nome: dados.nome,
+                $quantidade: dados.quantidade,
+            });
+        } catch (error) {
+            throw error;
+        } finally {
+            await regras.finalizeAsync();
+        }
+    }
+
+    return { create, read, update, remove }
     
 }

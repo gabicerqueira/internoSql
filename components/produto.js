@@ -1,9 +1,9 @@
 import { Pressable, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export function Produto({ data, onDelete }) {
+export function Produto({ cor, data, onDelete, onPress }) {
     return (
-        <Pressable style={styles.container} >
+        <Pressable onPress={onPress} style={[{ borderColor: cor , borderWidth:2,}, styles.container]} >
             <Text style={styles.text}>
                 {data.quantidade} - {data.nome}
             </Text>
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
+        fontSize: 18
     },
 });
